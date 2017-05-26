@@ -1,7 +1,5 @@
 #!/bin/sh -x
 
-: ${NAMESPACE:=default}
-
 (cd step1 && helm install --name helm-2437 .)
 sleep 2
 (cd step2 && helm upgrade helm-2437 .)
