@@ -1,0 +1,44 @@
+---
+# Source: jumpbox/templates/deployment.yaml
+
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: "{{ .Release.Name }}-dep"
+  labels:
+    release: {{ .Release.Name }}
+  annotations:
+    chart: {{ .Chart.Name }}
+    step1: "true"
+spec:
+  replicas: 0
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        release: {{ .Release.Name }}
+      annotations:
+        chart: {{ .Chart.Name }}
+    spec:
+      containers:
+      - image: "alpine:latest"
+        imagePullPolicy: IfNotPresent
+        command: ["bash", "-c", "sleep 99999999"]
+        name: shell
+        resources: 
+          requests:
+            cpu: 10m
+            memory: 32Mi
+          limits:
+            cpu: 100m
+            memory: 256Mi
+        env:
+        - name: VAR1
+          value: step1
+      restartPolicy: Always
+      dnsPolicy: ClusterFirst
+      terminationGracePeriodSeconds: 30

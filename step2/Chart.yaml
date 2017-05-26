@@ -1,0 +1,6 @@
+name: helm-2437
+description: K8S Debug and Jumpbox
+version: 1.0.0
+keywords:
+  - shell
+engine: gotpl
