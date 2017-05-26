@@ -27,7 +27,7 @@ is what the chart contains. But because Helm believes that the env var had been 
 
 The following will show "step1" if the release state has become corrupted
 per HELM #2437.  If the upgrade in Step 3 had successfully brought the Deployment
-fully up to date, it would say "step1".
+fully up to date, it would say "step2".
 EXP
 
 kubectl get deploy helm-2437-dep  -o jsonpath='{.spec.template.spec.containers[0].env[0].value}'
